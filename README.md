@@ -91,9 +91,16 @@ In this exercise you will:
 #### Reflection Questions
 
 1. **How do you link `prev` and `next` pointers correctly using a static array?**
+Indem man die Zeiger jeweils auf die vorherige beziehungsweise nächste Position im Array zeigt oder auf NULL,
+ falls am Anfang oder Ende:
+nodes[i].prev = (i > 0) ? &nodes[i - 1] : NULL;
+nodes[i].next = (i < 4) ? &nodes[i + 1] : NULL;
+   
 2. **What are advantages and limitations of compile-time vs. dynamic allocation?**
+   Vorteile: Einfach zu handhaben, kein Speicher muss zur Laufzeit angefragt werden.
+   Nachteile: Größe ist fest, kann nicht verändert werden, und du kannst nicht mehr Knoten hinzufügen als geplant
 3. **How would you extend this static list to include additional data fields?**
-
+Hinzufügen von neue Felder in die Struktur DNode.
 ---
 
 ### Task 2: Interactive Singly Linked List
@@ -159,9 +166,11 @@ In this exercise you will:
 #### Reflection Questions
 
 1. **Why is `malloc` necessary when adding nodes dynamically?**
+   Weil man nicht weiß, wie viele Knoten gebraucht werden. malloc reserviert Speicher zur Laufzeit.
 2. **How can you traverse the list to print each node’s address and value?**
+   Mit einer Schleife: Von head aus immer zum nächsten Knoten gehen, bis das Ende (NULL) erreicht ist.
 3. **What are the consequences of not freeing the list before exit?**
-
+Der Speicher wird nicht zurückgegeben, das Programm belegt unnötig viel Speicher.
 ---
 
 ### Task 3: JSON Array to Linked List
@@ -244,7 +253,9 @@ gcc -o solutions/json_main solutions/json_main.c solutions/json_list.o -ljansson
 #### Reflection Questions
 
 1. **How does using `getopt` make the program more flexible than `argv[1]`?**
+   Weil man die Eingaben klarer und flexibler machen kann, z.B. Optionen wie -i datei.json angeben kann.
 2. **What happens if the user omits the `-i` option?**
+   Das Programm zeigt eine Anleitung und beendet sich.
 3. **How can you validate that the JSON file loaded is indeed an array?**
 
 ---
